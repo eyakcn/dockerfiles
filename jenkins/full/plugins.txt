@@ -1,0 +1,15 @@
+credentials:latest
+ssh-credentials:latest
+mailer:latest
+scm-api:latest
+matrix-project:latest
+git-client:latest
+git:latest
+greenballs:latest
+javadoc:latest
+junit:latest
+maven-plugin:latest
+nodejs:latest
+durable-task:latest
+ssh-slaves:latest
+docker-plugin:latest

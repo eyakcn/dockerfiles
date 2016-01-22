@@ -1,0 +1,6 @@
+nginx:
+  restart: always
+  build: ./nginx
+  container_name: wechat
+  ports:
+   - "80:80"
