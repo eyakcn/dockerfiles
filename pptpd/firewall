@@ -1,0 +1,5 @@
+#!/bin/bash
+/sbin/modprobe nf_conntrack_pptp nf_nat_pptp
+/sbin/iptables-restore < /etc/iptables.rules
+
+# save to /etc/network/if-pre-up.d/firewall
