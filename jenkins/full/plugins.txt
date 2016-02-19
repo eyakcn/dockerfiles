@@ -13,3 +13,4 @@ nodejs:latest
 durable-task:latest
 ssh-slaves:latest
 docker-plugin:latest
+gerrit-trigger:latest

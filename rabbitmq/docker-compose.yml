@@ -1,0 +1,11 @@
+release:
+  restart: always
+  build: ./release/
+  container_name: rabbitmq
+  hostname: main-rabbit
+  environment:
+   - RABBITMQ_DEFAULT_USER=guest # Spring Default
+   - RABBITMQ_DEFAULT_PASS=guest # Spring Default
+  ports:
+   - "61613:61613"
+   - "15672:15672"

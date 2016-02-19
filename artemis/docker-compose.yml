@@ -1,0 +1,12 @@
+release:
+  restart: always
+  build: ./release/
+  container_name: activemq_artemis
+  environment:
+   - ARTEMIS_USERNAME=guest # Spring Default
+   - ARTEMIS_PASSWORD=guest # Spring Default
+  ports:
+    - "8161:8161"   # Web Server
+    - "61616:61616" # Core,MQTT,AMQP,HORNETQ,STOMP,Openwire
+    - "61613:61613" # STOMP
+    - "61614:61614" # STOMP Over Web Sockets
