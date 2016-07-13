@@ -1,0 +1,6 @@
+workflow-aggregator:latest
+docker-workflow:latest
+docker-commons:latest
+authentication-tokens:latest
+credentials:latest
+xvnc:latest
