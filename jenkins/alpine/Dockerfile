@@ -64,3 +64,37 @@ ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+
+# install default plugins
+COPY plugins.txt /tmp/files/
+RUN /usr/local/bin/plugins.sh /tmp/files/plugins.txt
+
+USER root
+
+# Maven install
+ENV MAVEN_VERSION 3.3.9
+
+RUN mkdir -p /usr/share/maven \
+  && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
+    | tar -xz -C /usr/share/maven \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+ENV MAVEN_HOME /usr/share/maven
+
+VOLUME /root/.m2
+
+
+# NodeJS install
+ENV NPM_CONFIG_LOGLEVEL info
+ENV NODE_VERSION 6.3.0
+
+RUN mkdir -p /usr/share/node \
+  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/share/node \
+  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && ln -s /usr/share/node/bin/node /usr/bin/node \
+  && ln -s /usr/share/node/bin/npm /usr/bin/npm
+
+VOLUME /root/.npm
+
+USER ${user}
