@@ -77,7 +77,7 @@ ENV MAVEN_VERSION 3.3.9
 RUN mkdir -p /usr/share/maven \
   && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
     | tar -xz -C /usr/share/maven \
-  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+  && ln -s "/usr/share/maven/apache-maven-$MAVEN_VERSION/bin/mvn" /usr/bin/mvn
 
 ENV MAVEN_HOME /usr/share/maven
 
@@ -92,8 +92,8 @@ RUN mkdir -p /usr/share/node \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/share/node \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && ln -s /usr/share/node/bin/node /usr/bin/node \
-  && ln -s /usr/share/node/bin/npm /usr/bin/npm
+  && ln -s "/usr/share/node/node-v$NODE_VERSION-linux-x64/bin/node" /usr/bin/node \
+  && ln -s "/usr/share/node/node-v$NODE_VERSION-linux-x64/bin/npm" /usr/bin/npm
 
 VOLUME /root/.npm
 
