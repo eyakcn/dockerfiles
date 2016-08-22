@@ -14,7 +14,7 @@ ARG gid=1000
 # If you bind mount a volume from the host or a data container, 
 # ensure you use the same uid
 RUN addgroup -g ${gid} ${group} \
-    && adduser -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
+  && adduser -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
 
 # Jenkins home directory is a volume, so configuration and build history 
 # can be persisted and survive image upgrades
@@ -83,18 +83,7 @@ ENV MAVEN_HOME /usr/share/maven
 
 VOLUME /root/.m2
 
-
 # NodeJS install
-ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.3.0
-
-RUN mkdir -p /usr/share/node \
-  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/share/node \
-  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && ln -s "/usr/share/node/node-v$NODE_VERSION-linux-x64/bin/node" /usr/bin/node \
-  && ln -s "/usr/share/node/node-v$NODE_VERSION-linux-x64/bin/npm" /usr/bin/npm
+RUN apk add --no-cache nodejs
 
 VOLUME /root/.npm
-
-USER ${user}
