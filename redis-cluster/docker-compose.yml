@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  master:
+    restart: always
+    image: redis:alpine
+    container_name: redis-master
+    ports:
+     - "6379:6379"
+
+  slave:
+    restart: always
+    image: redis:alpine
+    depends_on:
+     - master
+    volumes:
+     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
